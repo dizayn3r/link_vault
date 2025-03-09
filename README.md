@@ -1,6 +1,4 @@
-# Link Vault - README
-
-## Description
+# Link Vault
 
 **Link Vault** is a powerful and intuitive bookmark manager designed to help you organize, store, and access your favorite links with ease. Whether you're saving articles, videos, tools, or websites, Link Vault ensures that your digital resources are always at your fingertips.
 
