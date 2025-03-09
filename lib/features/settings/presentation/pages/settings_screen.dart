@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/theme_provider.dart';
+import 'backup_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -26,6 +27,16 @@ class SettingsScreen extends StatelessWidget {
                         .setThemeMode(value ? ThemeMode.dark : ThemeMode.light);
                   },
                 ),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Backup & Restore'),
+            leading: const Icon(Icons.backup),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const BackupScreen()),
               );
             },
           ),

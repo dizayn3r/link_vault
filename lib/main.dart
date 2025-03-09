@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_vault/features/settings/presentation/providers/backup_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'features/bookmarks/data/datasources/local_database.dart';
@@ -25,11 +26,9 @@ import 'features/tags/presentation/providers/tag_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final themeProvider = ThemeProvider();
-  await themeProvider.init(); // Initialize theme before running the app
 
   final database =
-      await $FloorLocalDatabase.databaseBuilder('app_database.db').build();
+      await $FloorLocalDatabase.databaseBuilder('link_vault.db').build();
   final bookmarkRepository = BookmarkRepositoryImpl(database);
   final collectionRepository = CollectionRepositoryImpl(database);
   final tagRepository = TagRepositoryImpl(database);
@@ -51,7 +50,12 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(
+          create: (_) => ThemeProvider()..init(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => BackupProvider()..fetchBackups(),
+        ),
         ChangeNotifierProvider(
           create: (_) => BookmarkProvider(
             getBookmarksUsecase: getBookmarksUsecase,

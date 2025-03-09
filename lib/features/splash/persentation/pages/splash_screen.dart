@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:link_vault/features/dashboard/presentation/pages/dashboard_screen.dart';
+
+import '../../../permissions/presentation/pages/permission_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const DashboardScreen()),
+        MaterialPageRoute(builder: (context) => const PermissionScreen()),
       );
     });
   }

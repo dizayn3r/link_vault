@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../bookmarks/presentation/pages/bookmark_list_screen.dart';
 import '../../../collections/presentation/pages/collection_list_screen.dart';
@@ -39,19 +40,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark),
+            icon: Icon(FontAwesomeIcons.bookmark),
             label: 'Bookmarks',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.collections),
+            icon: Icon(FontAwesomeIcons.folder),
             label: 'Collections',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.tag),
+            icon: Icon(FontAwesomeIcons.hashtag),
             label: 'Tags',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
+            icon: Icon(FontAwesomeIcons.gear),
             label: 'Settings',
           ),
         ],
