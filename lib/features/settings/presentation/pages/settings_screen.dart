@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/theme_provider.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -9,8 +12,24 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Settings'),
       ),
-      body: const Center(
-        child: Text('Settings Screen'),
+      body: ListView(
+        children: [
+          Consumer<ThemeProvider>(
+            builder: (context, provider, child) {
+              return ListTile(
+                leading: Icon(Icons.dark_mode_rounded),
+                title: Text("Dark Mode"),
+                trailing: Switch(
+                  value: provider.themeMode == ThemeMode.dark,
+                  onChanged: (value) {
+                    provider
+                        .setThemeMode(value ? ThemeMode.dark : ThemeMode.light);
+                  },
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

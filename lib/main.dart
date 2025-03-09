@@ -14,6 +14,7 @@ import 'features/collections/domain/usecases/delete_collection.dart';
 import 'features/collections/domain/usecases/get_collections.dart';
 import 'features/collections/domain/usecases/update_collection.dart';
 import 'features/collections/presentation/providers/collection_provider.dart';
+import 'features/settings/presentation/providers/theme_provider.dart';
 import 'features/splash/persentation/pages/splash_screen.dart';
 import 'features/tags/data/repositories/tag_repository_impl.dart';
 import 'features/tags/domain/usecases/add_tag.dart';
@@ -24,6 +25,8 @@ import 'features/tags/presentation/providers/tag_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final themeProvider = ThemeProvider();
+  await themeProvider.init(); // Initialize theme before running the app
 
   final database =
       await $FloorLocalDatabase.databaseBuilder('app_database.db').build();
@@ -48,6 +51,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(
           create: (_) => BookmarkProvider(
             getBookmarksUsecase: getBookmarksUsecase,
@@ -83,9 +87,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
       title: 'Bookmark Manager',
-      theme: ThemeData(primarySwatch: Colors.teal),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      themeMode: themeProvider.themeMode,
       home: const SplashScreen(),
     );
   }
